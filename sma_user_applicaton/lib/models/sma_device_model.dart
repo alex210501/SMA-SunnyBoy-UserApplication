@@ -27,6 +27,15 @@ class SmaDevice {
     required this.password
   }): id = UuidGenerator.generate();
 
+  /// Create a [SmaDevice] instance from an existing one
+  SmaDevice.from(SmaDevice device)
+      : id = device.id,
+        name = device.name,
+        host = device.host,
+        port = device.port,
+        username = device.username,
+        password = device.password;
+
   /// Create an instance with default values
   SmaDevice.defaultInstance()
       : id = UuidGenerator.generate(),
