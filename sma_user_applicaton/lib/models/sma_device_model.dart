@@ -45,6 +45,16 @@ class SmaDevice {
         username = jsonData['username'] ?? defaultUsername,
         password = jsonData['password'] ?? defaultPassword;
 
+  /// Copy element from another [SmaDevice]
+  /// Note: [id] cannot be copied
+  void copy(SmaDevice device) {
+    name = device.name;
+    host = device.host;
+    port = device.port;
+    username = device.username;
+    password = device.password;
+  }
+
   /// Return a JSON representation of the class
   Map<String, dynamic> toJson() {
     return <String, dynamic> {

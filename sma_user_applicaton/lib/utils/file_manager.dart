@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 const String assetsDirectory = 'assets';
 
@@ -34,10 +34,10 @@ class FileManager {
       await file.create(recursive: true);
     }
 
-    await file.writeAsString(content);
+    // Write and close the file
+    file.writeAsStringSync(content);
   }
 }
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
