@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../models/sma_device_model.dart';
+import '../models/sma_data_model.dart';
 import 'sma_http.dart';
 
 /// Class that make the interface between the application
@@ -58,8 +59,8 @@ class SmaApi {
     _cookies = <String>[];
   }
 
-  /// Get the values from the server and return an Map<String, dynamic>
-  Future<Map<String, dynamic>> getValues() async {
+  /// Get the values from the server and return an SmaData
+  Future<SmaData> getValues() async {
     HttpClientResponse response = await _smaHttp.getValues(_token, _cookies);
     String body = await SmaHttp.getBodyFromResponse(response);
 
@@ -67,7 +68,7 @@ class SmaApi {
       throw Exception("Error during the getValues (${response.statusCode}): $body");
     }
 
-    return json.decode(body);
+    return SmaData.fromJson(json.decode(body));
   }
 }
 
@@ -81,7 +82,7 @@ void main() {
       password: "1234"));
 
   smaApi.login().then((_) async {
-    Map values = await smaApi.getValues();
-    print(values);
+    SmaData values = await smaApi.getValues();
+    print(jsonEncode(values));
   });
 }
