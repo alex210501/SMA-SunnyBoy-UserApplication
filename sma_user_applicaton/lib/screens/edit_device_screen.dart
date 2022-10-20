@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sma_user_applicaton/services/sma_device_manager.dart';
 
 import '../models/sma_device_model.dart';
 import '../widgets/edit_device_text_form.dart';
@@ -65,7 +67,8 @@ class _EditDeviceScreenState extends State<EditDeviceScreen> {
             icon: const Icon(Icons.done),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                // Copy in file
+                Provider.of<SmaDeviceManager>(context, listen: false)
+                    .addDevice(widget.smaDevice);
               }
             },
           )
@@ -164,5 +167,6 @@ class MyApp extends StatelessWidget {
 }
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => SmaDeviceManager(), child: const MyApp()));
 }

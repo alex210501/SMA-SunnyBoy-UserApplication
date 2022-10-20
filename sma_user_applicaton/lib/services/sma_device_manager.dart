@@ -8,7 +8,7 @@ import '../utils/file_manager.dart';
 const String devicesFilePath = 'configurations/devices.json';
 
 /// Class that manage the existing device
-class SmaDeviceManager {
+class SmaDeviceManager extends ChangeNotifier {
   final List<SmaDevice> _devices = <SmaDevice>[];
 
   /// Get an unmodifiable list of [SmaDevice]
@@ -23,6 +23,8 @@ class SmaDeviceManager {
     for (var jsonDevice in jsonData) {
       _devices.add(SmaDevice.fromJson(jsonDevice));
     }
+
+    notifyListeners();
   }
 
   /// Add a [device] in the list and edit it if it is already in the list
@@ -38,6 +40,7 @@ class SmaDeviceManager {
 
     /// Update the file
     await FileManager.writeFileToDocuments(devicesFilePath, jsonEncode(this));
+    notifyListeners();
   }
 
   /// Remove the specific [device]
@@ -50,6 +53,7 @@ class SmaDeviceManager {
     /// Remove device and update the file
     _devices.removeWhere((item) => item == device);
     FileManager.writeFileToDocuments(devicesFilePath, jsonEncode(this));
+    notifyListeners();
   }
 
   /// Return a JSON representation of the class
