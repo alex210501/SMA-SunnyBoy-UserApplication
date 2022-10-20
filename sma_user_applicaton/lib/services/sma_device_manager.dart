@@ -19,6 +19,7 @@ class SmaDeviceManager extends ChangeNotifier {
   /// path
   Future<void> createDevicesFromFile() async {
     List<dynamic> jsonData = await _loadDevicesFromFile();
+    _devices.clear();
 
     for (var jsonDevice in jsonData) {
       _devices.add(SmaDevice.fromJson(jsonDevice));

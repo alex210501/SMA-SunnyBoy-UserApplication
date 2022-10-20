@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sma_user_applicaton/services/sma_device_manager.dart';
 
 import '../models/sma_device_model.dart';
+import '../services/sma_device_manager.dart';
 import '../widgets/edit_device_text_form.dart';
 
 class _ListViewContainer extends StatelessWidget {
@@ -86,7 +86,7 @@ class _EditDeviceScreenState extends State<EditDeviceScreen> {
                 labelText: 'Device',
                 hintText: 'Device name',
                 validator: (value) {
-                  widget.smaDevice.host = value!;
+                  widget.smaDevice.name = value!;
                   return null;
                 },
               ),
