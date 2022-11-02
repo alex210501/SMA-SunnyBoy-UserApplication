@@ -6,15 +6,17 @@ import '../screens/edit_device_screen.dart';
 import '../services/sma_device_manager.dart';
 
 class DeviceListTile extends StatefulWidget {
+  final Function? onTap;
   final SmaDevice smaDevice;
 
-  const DeviceListTile({Key? key, required this.smaDevice}) : super(key: key);
+  const DeviceListTile({Key? key, required this.smaDevice, this.onTap}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _DeviceListTileState();
 }
 
 class _DeviceListTileState extends State<DeviceListTile> {
+  int tap = 0;
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -30,6 +32,7 @@ class _DeviceListTileState extends State<DeviceListTile> {
           alignment: Alignment.centerRight,
           child: const Icon(Icons.delete)),
       child: ListTile(
+        onTap: widget.onTap == null ? null : () => widget.onTap!(),
         title: Text(widget.smaDevice.name),
         subtitle: Text('${widget.smaDevice.host}:${widget.smaDevice.port}'),
         trailing: IconButton(

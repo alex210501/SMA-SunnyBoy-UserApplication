@@ -54,6 +54,23 @@ class SmaData {
         wlanIp = SingleData.fromJson(jsonData['wlan_ip'] ?? {}),
         time = SmaTime.fromJson(jsonData['time'] ?? {});
 
+  /// Construct an instance with default values
+  SmaData.defaultInstance()
+      : power = SingleData(0, "W"),
+        energyToday = SingleData(0, "Wh"),
+        energyTotal = SingleData(0, "Wh"),
+        l1Power = SingleData(0, "W"),
+        l1Voltage = SingleData(0, "V"),
+        l1Current = SingleData(0, "mA"),
+        frequency = SingleData(0, "Hz"),
+        dcPower = SingleData(0, "W"),
+        dcVoltage = SingleData(0, "V"),
+        dcCurrent = SingleData(0, "mA"),
+        operatingTime = SingleData(0, "s"),
+        ethernetIp = SingleData("", ""),
+        wlanIp = SingleData("", ""),
+        time = SmaTime(0, 0);
+
   /// Return a JSON representation of the class
   Map<String, dynamic> toJson() {
     return <String, dynamic> {

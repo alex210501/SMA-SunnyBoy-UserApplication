@@ -4,40 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/sma_device_model.dart';
 import '../services/sma_device_manager.dart';
 import '../widgets/edit_device_text_form.dart';
-
-class _ListViewContainer extends StatelessWidget {
-  final String? title;
-  List<Widget> children;
-
-  _ListViewContainer({required this.children, this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          title != null
-              ? Text(
-                  title!,
-                  style: const TextStyle(fontSize: 20),
-                )
-              : Container(),
-          Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              padding: const EdgeInsets.all(10),
-              child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  children: children))
-        ]));
-  }
-}
+import '../widgets/listview_container.dart';
 
 class EditDeviceScreen extends StatefulWidget {
   SmaDevice smaDevice;
@@ -90,7 +57,7 @@ class _EditDeviceScreenState extends State<EditDeviceScreen> {
                   return null;
                 },
               ),
-              _ListViewContainer(title: 'Network', children: [
+              ListViewContainer(title: 'Network', children: [
                 EditDeviceTextForm(
                   initialValue: widget.smaDevice.host,
                   labelText: 'Host',
@@ -119,7 +86,7 @@ class _EditDeviceScreenState extends State<EditDeviceScreen> {
                   },
                 )
               ]),
-              _ListViewContainer(title: 'Authentication', children: [
+              ListViewContainer(title: 'Authentication', children: [
                 EditDeviceTextForm(
                   initialValue: widget.smaDevice.username,
                   labelText: 'Username',

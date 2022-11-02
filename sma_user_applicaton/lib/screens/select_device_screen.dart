@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sma_user_applicaton/screens/device_data_screen.dart';
 
 import '../models/sma_device_model.dart';
 import '../screens/edit_device_screen.dart';
@@ -36,12 +37,20 @@ class _SelectDeviceScreenState extends State<SelectDeviceScreen> {
                 ),
               ]),
               body: Consumer<SmaDeviceManager>(builder: (context, _, __) {
+
                 return ListView.separated(
                     itemCount: deviceManager.devices.length,
-                    separatorBuilder: (BuildContext context, int index) => const Divider(),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
                     itemBuilder: (BuildContext context, int index) {
                       return DeviceListTile(
-                          smaDevice: deviceManager.devices[index]);
+                        smaDevice: deviceManager.devices[index],
+                        onTap:() => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DeviceDataScreen(
+                                    deviceManager.devices[index]))),
+                      );
                     });
               }));
         });
